@@ -1,6 +1,6 @@
 package Utils;
 
-public class Record extends BaseData {
+public class Record {
 
     private String id;
     private String first_name;

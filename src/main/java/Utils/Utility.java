@@ -54,17 +54,6 @@ public class Utility {
      * @return list of records from JSON
      */
     private static List<Record> getDataFromJson (RouteData data) {
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        ArrayList<Record> dataJson = null;
-//        try {
-//            dataJson = objectMapper.readValue(data.getData().replaceAll(",]", "]"),
-//                    new TypeReference<ArrayList<Record>>(){});
-//        } catch (JsonProcessingException e) {
-//            System.out.println("Error in reading from JSON file. Check integrity or format of file.\n" + e);
-//        }
-//
-//        return dataJson;
-
         try{
             return new ObjectMapper().readValue(data.getData().replaceAll(",]", "]"), new TypeReference<ArrayList<Record>>(){});
         } catch (JsonProcessingException e) {
@@ -80,18 +69,8 @@ public class Utility {
      * @return list of records from YAML
      */
     private static List<Record> getDataFromYaml (RouteData data) {
-//        YAMLMapper yamlMapper = new YAMLMapper();
-//        ArrayList<Record> dataYaml = null;
-//        try {
-//            dataYaml = yamlMapper.readValue(data.getData(), new TypeReference<ArrayList<Record>>(){});
-//        } catch (IOException e) {
-//            System.out.println("Error in reading from YAML file. Check integrity or format of file.\n" + e);
-//        }
-//
-//        return dataYaml;
-
         try{
-            return new YAMLMapper().readValue(data.getData().replaceAll(",]", "]"), new TypeReference<ArrayList<Record>>(){});
+            return new YAMLMapper().readValue(data.getData(), new TypeReference<ArrayList<Record>>(){});
         } catch (JsonProcessingException e) {
             System.err.println("Error in reading from YAML file, check integrity or format of file.\n" + e);
         }
@@ -105,18 +84,8 @@ public class Utility {
      * @return list of records from XML
      */
     private static List<Record> getDataFromXml (RouteData data) {
-//        XmlMapper xmlMapper = new XmlMapper();
-//        ArrayList<Record> dataXml = null;
-//        try {
-//            dataXml = xmlMapper.readValue(data.getData(), new TypeReference<ArrayList<Record>>(){});
-//        } catch (IOException e) {
-//            System.out.println("Error in reading from XML file. Check integrity or format of file.\n" + e);
-//        }
-//
-//        return dataXml;
-
         try{
-            return new XmlMapper().readValue(data.getData().replaceAll(",]", "]"), new TypeReference<ArrayList<Record>>(){});
+            return new XmlMapper().readValue(data.getData(), new TypeReference<ArrayList<Record>>(){});
         } catch (JsonProcessingException e) {
             System.err.println("Error in reading from XML file, check integrity or format of file.\n" + e);
         }
@@ -170,6 +139,9 @@ public class Utility {
         return recordsList;
     }
 
+    /**
+     * Process all data from server and write it in database.
+     */
     public static void addDataFromServer(){
         if(allDataFromServer != null && allDataFromServer.size() > 0) {
             System.out.println(recordsDatabase);
